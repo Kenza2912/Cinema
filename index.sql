@@ -63,7 +63,7 @@ SELECT CONCAT(p.nom, ' ', p.prenom) AS personne
 FROM acteur a
 JOIN personne p ON a.id_personne = p.id_personne
 WHERE EXISTS (
-			SELECT 1 
+			SELECT a.id_acteur 
 			FROM realisateur r 
 			WHERE r.id_personne = a.id_personne
     );
@@ -100,3 +100,7 @@ LEFT JOIN film f ON c.id_film = f.id_film
 GROUP BY a.id_acteur
 HAVING COUNT(f.id_film) >= 3
 ORDER BY nbFilm DESC;
+
+
+
+
