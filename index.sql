@@ -44,8 +44,8 @@ ORDER BY nbFilm DESC;
 -- f. Casting d’un film en particulier (id_film) : nom, prénom des acteurs + sexe
 SELECT CONCAT(p.nom, ' ', p.prenom) AS acteur, p.sexe
 FROM casting c
-JOIN acteur a ON c.id_acteur = a.id_acteur
-JOIN personne p ON a.id_personne = p.id_personne
+LEFT JOIN acteur a ON c.id_acteur = a.id_acteur
+LEFT JOIN personne p ON a.id_personne = p.id_personne
 WHERE c.id_film = 1
 ORDER BY acteur;
 
@@ -75,15 +75,10 @@ WHERE EXISTS (
 
 -- j. Nombre d’hommes et de femmes parmi les acteurs
 
-SELECT 
-    sexe, 
-    COUNT(*) AS nombre_acteurs
-FROM 
-    Acteur A
-JOIN 
-    Personne P ON A.id_personne = P.id_personne
-GROUP BY 
-    sexe;
+SELECT p.sexe, COUNT(a.id_acteur) AS nbActeur
+FROM acteur a
+LEFT JOIN personne p ON a.id_personne = p.id_personne
+GROUP BY p.sexe;
 
 -- k. Liste des acteurs ayant plus de 50 ans (âge révolu et non révolu)
 
@@ -91,19 +86,11 @@ GROUP BY
 
 
 -- l. Acteurs ayant joué dans 3 films ou plus
-
-SELECT 
-    CONCAT(P.nom, ' ', P.prenom) AS acteur,
-    COUNT(*) AS nombre_films
-FROM 
-    casting C
-JOIN 
-    Acteur A ON C.id_acteur = A.id_acteur
-JOIN 
-    Personne P ON A.id_personne = P.id_personne
-GROUP BY 
-    A.id_acteur
-HAVING 
-    COUNT(*) >= 3
-ORDER BY 
-    nombre_films DESC;
+SELECT CONCAT(p.nom, ' ', p.prenom) AS acteur,COUNT(f.id_film) AS nbFilm
+FROM casting c
+LEFT JOIN acteur a ON c.id_acteur = a.id_acteur
+LEFT JOIN personne p ON a.id_personne = p.id_personne
+LEFT JOIN film f ON c.id_film = f.id_film
+GROUP BY a.id_acteur
+HAVING COUNT(*) >= 3
+ORDER BY nbFilm DESC;
