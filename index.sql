@@ -28,8 +28,8 @@ ORDER BY f.annee;
 -- d. Nombre de films par genre (classés dans l’ordre décroissant)
 SELECT g.libelle, COUNT(f.id_film) AS nbFilm
 FROM appartient a
-JOIN genre g ON a.id_genre = g.id_genre
-JOIN film f ON a.id_film = f.id_film
+LEFT JOIN genre g ON a.id_genre = g.id_genre
+LEFT JOIN film f ON a.id_film = f.id_film
 GROUP BY g.libelle
 ORDER BY nbFilm DESC;
 
@@ -53,8 +53,8 @@ ORDER BY acteur;
 -- g. Films tournés par un acteur en particulier (id_acteur) avec leur rôle et l’année de sortie (du film le plus récent au plus ancien)
 SELECT f.titre, r.nomPersonnage, f.annee
 FROM casting c
-JOIN film f ON c.id_film = f.id_film
-JOIN role r ON c.id_role = r.id_role
+LEFT JOIN film f ON c.id_film = f.id_film
+LEFT JOIN role r ON c.id_role = r.id_role
 WHERE c.id_acteur = 3 
 ORDER BY f.annee DESC;
 
@@ -71,7 +71,10 @@ WHERE EXISTS (
 
 -- i. Liste des films qui ont moins de 5 ans (classés du plus récent au plus ancien)
 
-
+SELECT f.titre, f.annee
+FROM film f
+WHERE YEAR(NOW()) -  YEAR(f.annee)  < 5
+ORDER BY f.annee DESC;
 
 -- j. Nombre d’hommes et de femmes parmi les acteurs
 
@@ -81,7 +84,10 @@ LEFT JOIN personne p ON a.id_personne = p.id_personne
 GROUP BY p.sexe;
 
 -- k. Liste des acteurs ayant plus de 50 ans (âge révolu et non révolu)
-
+SELECT CONCAT(p.nom, ' ', p.prenom) AS acteur, p.dateNaissance
+FROM acteur a 
+LEFT JOIN personne p ON a.id_personne = p.id_personne
+WHERE YEAR(NOW()) - YEAR(p.dateNaissance) > 50
 
 
 
@@ -92,5 +98,5 @@ LEFT JOIN acteur a ON c.id_acteur = a.id_acteur
 LEFT JOIN personne p ON a.id_personne = p.id_personne
 LEFT JOIN film f ON c.id_film = f.id_film
 GROUP BY a.id_acteur
-HAVING COUNT(*) >= 3
+HAVING COUNT(f.id_film) >= 3
 ORDER BY nbFilm DESC;
