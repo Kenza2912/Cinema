@@ -5,7 +5,7 @@ namespace Model;
 // on se contente de déclarer la connexion à la base de données
 abstract class Connect {
     const HOST ="localhost";
-    const BD ="cinema";
+    const DB ="cinema";
     const USER ="root";
     const PASS ="";
 

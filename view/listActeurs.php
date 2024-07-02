@@ -3,21 +3,20 @@
 
 <!-- On commence et on termine la vue par "ob_start()" et "ob_get_clean()" -->
 <?php ob_start(); ?>
-<p class="uk-table uk-table-striped"> Il y a <?=requete->rowCount () ?> acteurs </p>
+<p class="uk-table uk-table-striped"> Il y a <?= $requete->rowCount() ?> acteurs </p>
 
 <table class="uk-table uk-table-striped">
     <thead>
         <tr>
-            <th>NOM</th>
-            <th>PRENOM</th>
+            <th>NOM et PRENOM</th>
+            
         </tr>
     </thead>
     <tbody>
         <?php
             foreach ($requete->fetchAll() as $acteur) { ?>
                 <tr>
-                    <td><?= $acteur["nom"] ?></td>
-                    <td><?= $acteur["prenom"] ?></td>
+                    <td><?= $acteur["acteur"] ?></td>
                 </tr>
        <?php } ?>
     </tbody>

@@ -1,3 +1,11 @@
+<?php
+
+session_start();
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,8 +16,12 @@
     <title><?= $titre ?></title>
 </head>
 <body>
-    <nav>
 
+
+    <nav>
+        <a href="index.php?action=home">Home</a>
+        <a href="index.php?action=listFilms">Films</a>
+        <a href="index.php?action=listActeurs">Acteurs</a>
     </nav>
     <div id="wrapper" class="uk-container uk-container-expand">
         <main>
@@ -21,5 +33,14 @@
             </div>
         </main>
     </div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit-icons.min.js"></script>
 </body>
 </html>
+
+
+<!-- ce fichier sert de modèle pour toutes les vues  -->
