@@ -1,6 +1,3 @@
-<!-- Dans le fichier "Connect.php" on se contente de déclarer la connexion à la base de données -->
-
-
 <?php
 
 namespace Model; 
@@ -26,4 +23,6 @@ abstract class Connect {
     
 
 }
+
+// Dans le fichier "Connect.php" on se contente de déclarer la connexion à la base de données 
 

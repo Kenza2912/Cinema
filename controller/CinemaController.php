@@ -1,6 +1,3 @@
-<!-- Le fichier CinemaController.php sert à gérer les actions liées aux films et aux acteurs. Contient l'ensemble des 
-requêtes dans les fonctions en relation avec les vues  -->
-
 <?php
 
 
@@ -20,3 +17,5 @@ class CinemaController{
         // On relie par un "require" la vue qui nous intéresse (située dans le dossier "view")
     }
 }
+
+// Le fichier CinemaController.php sert à gérer les actions liées aux films et aux acteurs. Contient l'ensemble des requêtes dans les fonctions en relation avec les vues 
