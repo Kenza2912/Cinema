@@ -1,3 +1,6 @@
+<!-- index.php sert à accueillir l'action transmise par l'URL (en GET), il gère les requêtes et dirige les actions vers le controlleur -->
+
+
 <?php
 
 
@@ -16,7 +19,7 @@ spl_autoload_register(function ($class_name) {
 $ctrlCinema =new CinemaController(); 
 
 
-// En fonction de l'action détectée dans l'URL via la propriété "action" on interagit avec la bonne méthode du controller 
+// En fonction de l'action détectée dans l'URL via la propriété "action" on interagit avec la bonne méthode du controller (on vérifie si l'action est définie dans l'URL)
 
 if(isset($_GET["action"])){
     switch ($_GET["action"]) {
