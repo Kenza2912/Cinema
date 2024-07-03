@@ -20,7 +20,7 @@ class CinemaController{
     public function listActeurs() {
         $pdo = Connect::seConnecter(); 
         // On exécute la requête de notre choix
-        $requete = $pdo->query("SELECT CONCAT(p.nom, ' ', p.prenom) AS acteur FROM acteur a LEFT JOIN personne p ON a.id_personne = p.id_personne"); 
+        $requete = $pdo->query("SELECT a.id_acteur, CONCAT(p.nom, ' ', p.prenom) AS acteur FROM acteur a LEFT JOIN personne p ON a.id_personne = p.id_personne"); 
         require "view/listActeurs.php";
         // On relie par un "require" la vue qui nous intéresse (située dans le dossier "view")
     }
@@ -28,6 +28,38 @@ class CinemaController{
     public function home() {
         require "view/home.php";
         // On relie par un "require" la vue qui nous intéresse (située dans le dossier "view")
+    }
+
+    public function detailFilm($id) {
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->prepare("SELECT f.id_film, f.titre, f.annee, f.duree, f.resume, f.note, CONCAT(p.nom, ' ', p.prenom) AS realisateur FROM film f JOIN realisateur r ON f.id_realisateur = r.id_realisateur JOIN personne p ON r.id_personne= p.id_personne WHERE f.id_film = :id");
+        $requete->execute(["id" => $id]);
+      
+        require "view/detailFilm.php";
+    }
+
+    public function detailActeur($id) {
+        $pdo = Connect::seConnecter();
+         
+        $requete= $pdo->prepare("SELECT a.id_acteur, p.nom, p.prenom, p.sexe, p.dateNaissance FROM personne p JOIN acteur a ON p.id_personne = a.id_personne WHERE a.id_acteur = :id"); 
+        $requete->execute(["id" => $id]);
+
+        // $acteur = $requete->fetch();
+
+        // if (!$requete) {
+        //     // Redirigez ou affichez un message d'erreur si l'acteur n'est pas trouvé
+        //     die('Acteur non trouvé.');
+        // } else {
+        //     // Debugging: afficher le contenu de $acteur
+        //     echo "<pre>";
+        //     print_r($acteur);
+        //     echo "</pre>";
+        // }
+
+
+
+        require "view/detailActeur.php";
+       
     }
 
 
@@ -39,4 +71,4 @@ class CinemaController{
 // :On fetch s'il n'y a qu'un seul résultat attendu (une ligne sur HeidiSQL) --> retourne un tableau associatif 
 // On fetchAll si un ensemble de résultats est attendu (plusieurs lignes sur HeidiSQL) --> retourne un tableau de tableaux associatifs
 
-// Le fichier CinemaController.php sert à gérer les actions liées aux films et aux acteurs. Contient l'ensemble des requêtes dans les fonctions en relation avec les vues 
+// Le fichier CinemaController.php sert à gérer les actions liées aux films et aux acteurs. Contient l'ensemble des requêtes SQL dans les fonctions en relation avec les vues 

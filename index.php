@@ -20,12 +20,24 @@ $ctrlCinema =new CinemaController();
 
 
 // En fonction de l'action détectée dans l'URL via la propriété "action" on interagit avec la bonne méthode du controller (on vérifie si l'action est définie dans l'URL)
-
+// Vérification de l'ID
+$id = isset($_GET["id"]) ? $_GET["id"] : null;
 if(isset($_GET["action"])){
     switch ($_GET["action"]) {
         case "listFilms" : $ctrlCinema->listFilms(); break;
         case "listActeurs" : $ctrlCinema->listActeurs(); break;
         case "home" : $ctrlCinema->home(); break;
+        case "detailFilm" :
+            $id = isset($_GET['id']) ? $_GET['id'] : null;
+            $ctrlCinema->detailFilm($id); break;
+        case "detailActeur":
+             $id = isset($_GET['id']) ? $_GET['id'] : null;
+             $ctrlCinema->detailActeur($id); break;    
+        default : $ctrlCinema->home(); break;
+
        
     }
 }
+
+
+
