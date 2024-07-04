@@ -20,8 +20,7 @@ $film=$requete->fetch()  ?>
         </tr>
     </thead>
     <tbody>
-             <?php
-            foreach ($requete->fetchAll() as $film) { ?>
+             
                 <tr>
                     <td><?= $film["titre"] ?></td>
                     <td><?= $film["annee"] ?></td>
@@ -30,9 +29,10 @@ $film=$requete->fetch()  ?>
                     <td><?= $film["resume"] ?></td>
                     <td><?= $film["note"] ?></td>
                 </tr>
-             <?php } ?>
+           
     </tbody>
 </table>
+
 
 <?php
 

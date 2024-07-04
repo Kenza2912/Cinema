@@ -12,7 +12,7 @@ class CinemaController{
     public function listFilms() {
         $pdo = Connect::seConnecter(); 
         // On exécute la requête de notre choix
-        $requete = $pdo->query("SELECT titre, annee FROM film"); 
+        $requete = $pdo->query("SELECT f.id_film, titre, annee FROM film f"); 
         require "view/listFilms.php";
         // On relie par un "require" la vue qui nous intéresse (située dans le dossier "view")
     }
@@ -34,6 +34,7 @@ class CinemaController{
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("SELECT f.id_film, f.titre, f.annee, f.duree, f.resume, f.note, CONCAT(p.nom, ' ', p.prenom) AS realisateur FROM film f JOIN realisateur r ON f.id_realisateur = r.id_realisateur JOIN personne p ON r.id_personne= p.id_personne WHERE f.id_film = :id");
         $requete->execute(["id" => $id]);
+        
       
         require "view/detailFilm.php";
     }
