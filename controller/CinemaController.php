@@ -32,10 +32,15 @@ class CinemaController{
 
     public function detailFilm($id) {
         $pdo = Connect::seConnecter();
-        $requete = $pdo->prepare("SELECT f.id_film, f.titre, f.annee, f.duree, f.resume, f.note, CONCAT(p.nom, ' ', p.prenom) AS realisateur FROM film f JOIN realisateur r ON f.id_realisateur = r.id_realisateur JOIN personne p ON r.id_personne= p.id_personne WHERE f.id_film = :id");
+        $requete = $pdo->prepare("SELECT f.id_film, f.titre, f.annee, f.duree, f.resume, f.note, f.affiche, CONCAT(p.nom, ' ', p.prenom) AS realisateur FROM film f JOIN realisateur r ON f.id_realisateur = r.id_realisateur JOIN personne p ON r.id_personne= p.id_personne WHERE f.id_film = :id");
         $requete->execute(["id" => $id]);
         
+        $requeteGenres = $pdo->prepare("SELECT g.libelle FROM genre g JOIN appartient a ON g.id_genre = a.id_genre WHERE a.id_film = :id");
+        $requeteGenres->execute(['id' => $id]);
       
+        $requeteCasting = $pdo->prepare("SELECT CONCAT(p.nom, ' ', p.prenom) AS acteur, r.nomPersonnage FROM casting c JOIN acteur a ON c.id_acteur = a.id_acteur JOIN personne p ON a.id_personne = p.id_personne JOIN role r ON c.id_role= r.id_role WHERE c.id_film = :id");
+        $requeteCasting->execute(['id' => $id]);
+
         require "view/detailFilm.php";
     }
 

@@ -33,6 +33,37 @@ $film=$requete->fetch()  ?>
     </tbody>
 </table>
 
+<?php if (!empty($film['affiche'])): ?>
+    <img class="image" src="public/image/<?= htmlspecialchars($film['affiche']) ?>" alt="Affiche du film <?= htmlspecialchars($film['titre']) ?>">
+<?php else: ?>
+    <p>Aucune image disponible.</p>
+<?php endif; ?>
+
+<?php $genres = $requeteGenres->fetchAll(); ?>
+<p>Genres :
+    <?php if (!empty($genres)): ?>
+        <?php foreach ($genres as $genre): ?>
+            <?= htmlspecialchars($genre['libelle']) ?>
+        <?php endforeach; ?>
+    <?php else: ?>
+        Aucun genre disponible.
+    <?php endif; ?>
+</p>
+<?php $casting = $requeteCasting->fetchAll(); ?>
+<p>Casting :
+    <?php if (!empty($casting)): ?>
+        <ul>
+            <?php foreach ($casting as $cast): ?>
+                <li><?= htmlspecialchars($cast['acteur']) ?> dans le rôle de <?= htmlspecialchars($cast['nomPersonnage']) ?></li>
+            <?php endforeach; ?>
+        </ul>
+    <?php else: ?>
+        Aucun acteur disponible.
+    <?php endif; ?>
+</p>
+
+
+
 
 <?php
 
