@@ -17,13 +17,7 @@ class CinemaController{
         // On relie par un "require" la vue qui nous intéresse (située dans le dossier "view")
     }
 
-    public function listActeurs() {
-        $pdo = Connect::seConnecter(); 
-        // On exécute la requête de notre choix
-        $requete = $pdo->query("SELECT a.id_acteur, CONCAT(p.nom, ' ', p.prenom) AS acteur FROM acteur a LEFT JOIN personne p ON a.id_personne = p.id_personne"); 
-        require "view/listActeurs.php";
-        // On relie par un "require" la vue qui nous intéresse (située dans le dossier "view")
-    }
+   
 
     public function home() {
         require "view/home.php";
@@ -44,29 +38,7 @@ class CinemaController{
         require "view/detailFilm.php";
     }
 
-    public function detailActeur($id) {
-        $pdo = Connect::seConnecter();
-         
-        $requete= $pdo->prepare("SELECT a.id_acteur, p.nom, p.prenom, p.sexe, p.dateNaissance FROM personne p JOIN acteur a ON p.id_personne = a.id_personne WHERE a.id_acteur = :id"); 
-        $requete->execute(["id" => $id]);
-
-        // $acteur = $requete->fetch();
-
-        // if (!$requete) {
-        //     // Redirigez ou affichez un message d'erreur si l'acteur n'est pas trouvé
-        //     die('Acteur non trouvé.');
-        // } else {
-        //     // Debugging: afficher le contenu de $acteur
-        //     echo "<pre>";
-        //     print_r($acteur);
-        //     echo "</pre>";
-        // }
-
-
-
-        require "view/detailActeur.php";
-       
-    }
+   
 
 
 

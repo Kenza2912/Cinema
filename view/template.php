@@ -22,6 +22,7 @@ session_start();
         <a href="index.php?action=home">Home</a>
         <a href="index.php?action=listFilms">Films</a>
         <a href="index.php?action=listActeurs">Acteurs</a>
+        <a href="index.php?action=listGenres">GENRES</a>
     </nav>
     <div id="wrapper" class="uk-container uk-container-expand">
         <main>
