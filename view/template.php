@@ -23,6 +23,8 @@ session_start();
         <a href="index.php?action=listFilms">Films</a>
         <a href="index.php?action=listActeurs">Acteurs</a>
         <a href="index.php?action=listGenres">GENRES</a>
+        <a href="index.php?action=listRealisateur">Réalisateur</a>
+        <a href="index.php?action=listRoles">Casting</a>
     </nav>
     <div id="wrapper" class="uk-container uk-container-expand">
         <main>

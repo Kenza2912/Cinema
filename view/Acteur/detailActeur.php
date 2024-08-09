@@ -6,7 +6,7 @@
 $acteur=$requete->fetch() ?>
 
  
-    <h1><?= $acteur['prenom'] ?> <?= $acteur['nom']?></h1>
+    <h2><?= $acteur['prenom'] ?> <?= $acteur['nom']?></h2>
     <p>Sexe : <?= $acteur['sexe'] ?></p>
     <p>Date de Naissance : <?= $acteur['dateNaissance'] ?></p>
 

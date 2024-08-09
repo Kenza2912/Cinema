@@ -8,6 +8,8 @@
 use Controller\CinemaController; 
 use Controller\GenreController;
 use Controller\ActeurController;
+use Controller\RealisateurController;
+use Controller\CastingController;
 
 
 // On autocharge les classes du projet
@@ -21,6 +23,8 @@ spl_autoload_register(function ($class_name) {
 $ctrlCinema =new CinemaController(); 
 $ctrlGenre = new GenreController();
 $ctrlActeur = new ActeurController();
+$ctrlRealisateur = new RealisateurController();
+$ctrlCasting = new CastingController();
 
 
 // En fonction de l'action détectée dans l'URL via la propriété "action" on interagit avec la bonne méthode du controller (on vérifie si l'action est définie dans l'URL)
@@ -28,6 +32,7 @@ $ctrlActeur = new ActeurController();
 $id = isset($_GET["id"]) ? $_GET["id"] : null;
 if(isset($_GET["action"])){
     switch ($_GET["action"]) {
+             //FILM
         case "listFilms" : $ctrlCinema->listFilms(); break;
         case "home" : $ctrlCinema->home(); break;
         case "detailFilm" :
@@ -51,8 +56,25 @@ if(isset($_GET["action"])){
         case "afficherFormulaireGenre" : $ctrlGenre->afficherFormulaireGenre(); break;
         case "supprimerGenre" : $ctrlGenre->supprimerGenre($id);break;
 
+            //REALISATEUR
+        case "listRealisateur" : $ctrlRealisateur->listRealisateur(); break;
+        case "detailRealisateur" : $ctrlRealisateur->detailRealisateur($id); break;
+        case "afficherFormulaireRealisateur" : $ctrlRealisateur->afficherFormulaireRealisateur(); break;
+        case "ajouterRealisateur" : $ctrlRealisateur->ajouterRealisateur(); break;
+        case "supprimerRealisateur" : $ctrlRealisateur->supprimerRealisateur($id); break;
 
-        default : $ctrlCinema->home(); break;
+            //CASTING
+        case "listRoles" : $ctrlCasting->listRoles(); break;
+        case "detailRole" : $ctrlCasting->detailRole($id); break;
+        case "afficherFormulaireRole" : $ctrlCasting->afficherFormulaireRole(); break;
+        case "ajouterRole" : $ctrlCasting->ajouterRole(); break;
+        case "supprimerRole" : $ctrlCasting->supprimerRole($id); break;
+       
+
+        
+
+
+        default : $ctrlCinema->home(); break;   
 
        
     }
