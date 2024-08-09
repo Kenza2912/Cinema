@@ -29,7 +29,7 @@ class CastingController {
     }
 
     public function afficherFormulaireRole() {
-        require "view/Casting/ajouterCasting.php";
+        require "view/Casting/ajouterRole.php";
     }
 
     public function ajouterRole(){
@@ -53,8 +53,55 @@ class CastingController {
                 $requeteSupprimerRole = $pdo->prepare("DELETE FROM role WHERE id_role = :id ");
                 $requeteSupprimerRole->execute(["id" => $id]);
         }      
-        require("view/home.php");;
+        require("view/home.php");
     }
+
+    public function afficherFormulaireCasting() {
+
+        $pdo = Connect::seConnecter();
+        $requeteFilm = $pdo->query("SELECT id_film, titre FROM film");
+
+        $requeteActeur = $pdo->query("SELECT a.id_acteur, CONCAT(nom, ' ', prenom) as acteur FROM personne p, acteur a WHERE p.id_personne = a.id_personne");
+
+        $requeteRole = $pdo->query("SELECT r.id_role, r.nomPersonnage FROM role r");
+
+
+
+        require "view/Casting/ajouterCasting.php";
+    }
+
+    public function ajouterCasting(){
+
+        
+
+            $film= filter_input(INPUT_POST, "film");
+            $acteur = filter_input(INPUT_POST, "acteur");
+            $role = filter_input(INPUT_POST, "role");
+
+            if(isset($_POST["submitCasting"])){
+                $pdo = Connect::seConnecter();
+
+                $requeteAjouteCasting = $pdo->prepare("INSERT INTO casting (id_film, id_acteur, id_role)
+                                                        VALUES ('$film', '$acteur', '$role')");
+
+
+                $requeteAjouteCasting->execute();     
+            }
+            require("view/home.php");
+        }
+
+        public function supprimerCasting($id) {
+
+            if(isset($_POST["supprimerCasting"])){
+                $pdo = Connect::seConnecter();
+                
+                $requeteSupprimeCasting = $pdo->prepare("DELETE FROM casting WHERE id_role = :id");
+                $requeteSupprimeCasting->execute(["id" => $id]);
+            }
+            require("view/home.php");
+        }
+        
+
 
 
 }

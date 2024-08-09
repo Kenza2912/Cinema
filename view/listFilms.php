@@ -22,6 +22,7 @@
        <?php } ?>
     </tbody>
 </table>
+<button><a href="index.php?action=afficherFormulaireFilm">Ajouter un film</a></button>
 
 <?php
 

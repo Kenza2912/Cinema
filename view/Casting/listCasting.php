@@ -21,6 +21,7 @@
     </tbody>
 </table>
 <button><a href="index.php?action=afficherFormulaireRole">Ajouter un personnage </a></button>
+<button><a href="index.php?action=afficherFormulaireCasting">Ajouter un personnage à un acteur ou une actrice</a></button>
 
 <?php
 

@@ -22,6 +22,7 @@
 
 <button ><a href="index.php?action=afficherFormulaireRealisateur">Ajouter un réalisateur</a></button>
 
+
 <?php
 
 // Donc DANS CHAQUE VUE, il faudra toujours donner une valeur à $titre, $contenu et $titre_secondaire

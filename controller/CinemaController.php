@@ -38,8 +38,105 @@ class CinemaController{
         require "view/detailFilm.php";
     }
 
-   
+    public function afficherFormulaireFilm(){
+        $pdo = Connect::seConnecter();
+        $requeteRealisateur = $pdo->query("SELECT id_realisateur, CONCAT(p.nom, ' ', p.prenom) AS realisateur FROM realisateur r JOIN personne p ON p.id_personne = r.id_personne");   
+        $requeteRealisateur->execute();
+    
+        $requeteGenre = $pdo->query("SELECT * FROM genre");
+        $requeteGenre-> execute();
+        
+        require ("view/ajouterFilm.php");
+    }
 
+  
+    public function ajouterFilm() {
+        $pdo = Connect::seConnecter();
+    
+        if (isset($_POST["submitFilm"])) {
+            if (isset($_FILES["affiche"]) && $_FILES["affiche"]["error"] === 0) {
+                // Processus d'upload de l'image
+                $tmpName = $_FILES["affiche"]["tmp_name"];
+                $name = $_FILES["affiche"]["name"];
+                $size = $_FILES["affiche"]["size"];
+                $tabExtension = explode(".", $name);
+                $extension = strtolower(end($tabExtension));
+                $extensions = ["jpg", "png", "jpeg"];
+                $maxTaille = 4000000;
+    
+                if (in_array($extension, $extensions) && $size <= $maxTaille) {
+                    $uniqueName = uniqid("", true);
+                    $fileUnique = $uniqueName . "." . $extension;
+                    move_uploaded_file($tmpName, "./public/image/" . $fileUnique);
+                    $afficheChemin = "./public/image/" . $fileUnique;
+                } else {
+                    echo "L'image doit être au format JPG, PNG ou JPEG et ne doit pas dépasser 4MB.";
+                    return;
+                }
+            } else {
+                // Vérifications supplémentaires pour le débogage
+                if ($_FILES["affiche"]["error"] !== 0) {
+                    echo "Erreur lors de l'upload de l'image. Code d'erreur : " . $_FILES["affiche"]["error"];
+                } else {
+                    echo "Aucune image n'a été uploadée.";
+                }
+                return;
+            }
+    
+            // Récupération et validation des autres champs
+            $titre = filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $annee = filter_input(INPUT_POST, "annee", FILTER_SANITIZE_NUMBER_INT);
+            $duree = filter_input(INPUT_POST, "duree", FILTER_SANITIZE_NUMBER_INT);
+            $resume = filter_input(INPUT_POST, "resume", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $note = filter_input(INPUT_POST, "note", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+            $realisateur = filter_input(INPUT_POST, "realisateur", FILTER_SANITIZE_NUMBER_INT);
+    
+            // Préparation de la requête
+            $requeteAjouterFilm = $pdo->prepare("INSERT INTO film (titre, annee, duree, resume, note, affiche, id_realisateur)
+                                                  VALUES(:titre, :annee, :duree, :resume, :note, :afficheChemin, :realisateur)");
+    
+            // Exécution de la requête
+            $requeteAjouterFilm->execute([
+                "titre" => $titre,
+                "annee" => $annee,
+                "duree" => $duree,
+                "resume" => $resume,
+                "note" => $note,
+                "afficheChemin" => $afficheChemin,
+                "realisateur" => $realisateur
+            ]);
+            $requeteGenre = $pdo->query("SELECT id_genre, libelle FROM genre");
+            $requeteGenre->execute();
+
+            $genres = isset($_POST["genre"]) ? $_POST["genre"] : [];
+
+            foreach ($genres as $genre) {
+                $requeteAjouteGenre = $pdo->prepare("INSERT INTO appartient (id_film, id_genre) VALUES (LAST_INSERT_ID(), :id_genre)");
+                $requeteAjouteGenre->execute(["id_genre" => $genre]);
+            }
+        }
+    
+        require("view/home.php");
+    }
+
+    public function supprimerFilm($id){
+
+        $pdo = Connect::seConnecter();
+        if(isset($_POST["supprimerFilm"])){
+            
+            $requeteSupprimerAppartient = $pdo->prepare("DELETE FROM appartient WHERE id_film = :id"); 
+            $requeteSupprimerAppartient->execute(["id"=>$id]);
+
+
+            $requeteSupprimeFilm = $pdo->prepare("DELETE FROM film WHERE id_film = :id");
+            $requeteSupprimeFilm ->execute(["id"=>$id]);
+        }
+        require("view/home.php");
+    }
+    
+    
+    
+    
 
 
 }

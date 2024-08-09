@@ -20,8 +20,12 @@
 
    
     
-    <form action="index.php?action=supprimerRole&id=<?=$role["id_role"]?>" method="post">
-    <button name="supprimerRole" type="submit">Supprimer</button>   
+<form action="index.php?action=supprimerRole&id=<?=$role["id_role"]?>" method="post">
+    <button name="supprimerRole" type="submit">Supprimer le rôle</button>   
+</form>
+
+<form action="index.php?action=supprimerCasting&id=<?=$role["id_role"]?>" method="post">
+    <button name="supprimerCasting" type="submit">Supprimer le casting</button>   
 </form>
 
 <?php

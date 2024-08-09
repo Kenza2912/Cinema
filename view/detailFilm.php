@@ -62,7 +62,10 @@ $film=$requete->fetch()  ?>
     <?php endif; ?>
 </p>
 
-
+        <form method="post" action="index.php?action=supprimerFilm&id=<?= $film["id_film"]?>">
+          
+            <button  name="supprimerFilm" type="submit">Supprimer</button>
+        </form>
 
 
 <?php

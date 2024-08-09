@@ -38,6 +38,9 @@ if(isset($_GET["action"])){
         case "detailFilm" :
             $id = isset($_GET['id']) ? $_GET['id'] : null;
             $ctrlCinema->detailFilm($id); break;
+        case "afficherFormulaireFilm" : $ctrlCinema->afficherFormulaireFilm(); break;
+        case "ajouterFilm" : $ctrlCinema->ajouterFilm(); break;
+        case "supprimerFilm" : $ctrlCinema->supprimerFilm($id); break;
        
              //ACTEUR
         case "listActeurs" : $ctrlActeur->listActeurs(); break;
@@ -69,6 +72,9 @@ if(isset($_GET["action"])){
         case "afficherFormulaireRole" : $ctrlCasting->afficherFormulaireRole(); break;
         case "ajouterRole" : $ctrlCasting->ajouterRole(); break;
         case "supprimerRole" : $ctrlCasting->supprimerRole($id); break;
+        case "afficherFormulaireCasting" : $ctrlCasting->afficherFormulaireCasting(); break;
+        case "ajouterCasting" : $ctrlCasting->ajouterCasting(); break;
+        case "supprimerCasting" : $ctrlCasting->supprimerCasting($id); break;
        
 
         
