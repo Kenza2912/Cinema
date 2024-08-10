@@ -34,7 +34,7 @@ $film=$requete->fetch()  ?>
 </table>
 
 <?php if (!empty($film['affiche'])): ?>
-    <img class="image" src="public/image/<?= htmlspecialchars($film['affiche']) ?>" alt="Affiche du film <?= htmlspecialchars($film['titre']) ?>">
+    <img class="image" src="<?= htmlspecialchars($film['affiche']) ?>" alt="Affiche du film <?= htmlspecialchars($film['titre']) ?>">
 <?php else: ?>
     <p>Aucune image disponible.</p>
 <?php endif; ?>

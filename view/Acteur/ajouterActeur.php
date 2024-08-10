@@ -5,7 +5,7 @@ ob_start();
 ?>
 <div >
 
-<form  action="index.php?action=ajouterActeur" method="post" >
+<form  action="index.php?action=ajouterActeur" method="post" enctype="multipart/form-data" >
     
     <h1>"Ajouter un acteur ou une actrice</h1>
     
@@ -30,6 +30,13 @@ ob_start();
         <label for="dateNaissance">Date de naissance</label>
         <input type="date" name="dateNaissance" id="dateNaissance" max="<?= date('Y-m-d');?>"required>
     </div>
+
+    <div >
+            <label for="photo">Image de l'acteur </label>
+            <input name="photo" id="photo" type="file" required>
+        </div>
+
+
     
     <div >
         <input type="submit"  name="submitActeur" id="submitActeur">

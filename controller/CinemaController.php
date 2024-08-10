@@ -12,7 +12,7 @@ class CinemaController{
     public function listFilms() {
         $pdo = Connect::seConnecter(); 
         // On exécute la requête de notre choix
-        $requete = $pdo->query("SELECT f.id_film, titre, annee FROM film f"); 
+        $requete = $pdo->query("SELECT f.id_film, titre, annee, affiche FROM film f"); 
         require "view/listFilms.php";
         // On relie par un "require" la vue qui nous intéresse (située dans le dossier "view")
     }

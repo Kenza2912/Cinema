@@ -6,16 +6,23 @@
 $acteur=$requete->fetch() ?>
 
  
-    <h2><?= $acteur['prenom'] ?> <?= $acteur['nom']?></h2>
+    <h2 class="uk-heading-large"><?= $acteur['prenom'] ?> <?= $acteur['nom']?></h2>
+    
     <p>Sexe : <?= $acteur['sexe'] ?></p>
     <p>Date de Naissance : <?= $acteur['dateNaissance'] ?></p>
+
+    <?php if (!empty($acteur['photo'])): ?>
+    <img class="image" src="<?= htmlspecialchars($acteur['photo']) ?>" alt="Affiche de  <?= htmlspecialchars($acteur['nom']) ?>">
+<?php else: ?>
+    <p>Aucune image disponible.</p>
+<?php endif; ?>
 
     <h2> Les films dans lesquels l’acteur a joué</h2>
 
     <?php
         foreach($requeteFilms->fetchAll() as $film){
     ?>
-        <p><a href="index.php?action=detailFilm&id=<?= $film["id_film"]?>"><?= $film["titre"] ?></a></p>
+        <p><a class="uk-button uk-button-danger" href="index.php?action=detailFilm&id=<?= $film["id_film"]?>"class="uk-card-title"><?= $film["titre"] ?></a></p>
     <?php        
          }
     ?>

@@ -25,17 +25,10 @@ CREATE TABLE IF NOT EXISTS `acteur` (
   `id_personne` int NOT NULL,
   PRIMARY KEY (`id_acteur`),
   UNIQUE KEY `id_personne` (`id_personne`),
-  CONSTRAINT `FK_acteur_personne` FOREIGN KEY (`id_personne`) REFERENCES `personne` (`id_personne`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `FK_acteur_personne` FOREIGN KEY (`id_personne`) REFERENCES `personne` (`id_personne`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table cinema.acteur : ~0 rows (environ)
-INSERT INTO `acteur` (`id_acteur`, `id_personne`) VALUES
-	(1, 1),
-	(2, 2),
-	(3, 3),
-	(4, 7),
-	(5, 8),
-	(6, 9);
+-- Les données exportées n'étaient pas sélectionnées.
 
 -- Listage de la structure de table cinema. appartient
 CREATE TABLE IF NOT EXISTS `appartient` (
@@ -47,20 +40,7 @@ CREATE TABLE IF NOT EXISTS `appartient` (
   CONSTRAINT `FK_appartient_film` FOREIGN KEY (`id_film`) REFERENCES `film` (`id_film`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table cinema.appartient : ~0 rows (environ)
-INSERT INTO `appartient` (`id_genre`, `id_film`) VALUES
-	(1, 1),
-	(1, 2),
-	(1, 3),
-	(2, 1),
-	(2, 2),
-	(2, 3),
-	(4, 4),
-	(4, 5),
-	(2, 4),
-	(2, 5),
-	(3, 4),
-	(3, 5);
+-- Les données exportées n'étaient pas sélectionnées.
 
 -- Listage de la structure de table cinema. casting
 CREATE TABLE IF NOT EXISTS `casting` (
@@ -75,23 +55,7 @@ CREATE TABLE IF NOT EXISTS `casting` (
   CONSTRAINT `FK__role` FOREIGN KEY (`id_role`) REFERENCES `role` (`id_role`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table cinema.casting : ~0 rows (environ)
-INSERT INTO `casting` (`id_film`, `id_acteur`, `id_role`) VALUES
-	(1, 1, 1),
-	(1, 3, 3),
-	(1, 2, 2),
-	(2, 1, 1),
-	(2, 2, 2),
-	(2, 3, 3),
-	(3, 1, 1),
-	(3, 2, 2),
-	(3, 3, 3),
-	(4, 4, 4),
-	(4, 5, 5),
-	(4, 6, 7),
-	(5, 4, 4),
-	(5, 5, 5),
-	(5, 6, 7);
+-- Les données exportées n'étaient pas sélectionnées.
 
 -- Listage de la structure de table cinema. film
 CREATE TABLE IF NOT EXISTS `film` (
@@ -101,34 +65,23 @@ CREATE TABLE IF NOT EXISTS `film` (
   `duree` int NOT NULL DEFAULT '0',
   `resume` text NOT NULL,
   `note` int NOT NULL,
-  `affiche` varchar(255) NOT NULL,
+  `affiche` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `id_realisateur` int DEFAULT NULL,
   PRIMARY KEY (`id_film`),
   KEY `id_realisateur` (`id_realisateur`),
   CONSTRAINT `FK_film_realisateur` FOREIGN KEY (`id_realisateur`) REFERENCES `realisateur` (`id_realisateur`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table cinema.film : ~0 rows (environ)
-INSERT INTO `film` (`id_film`, `titre`, `annee`, `duree`, `resume`, `note`, `affiche`, `id_realisateur`) VALUES
-	(1, 'Harry Potter and the Philosopher\'s Stone', '2001-01-01', 152, 'Harry Potter, un jeune orphelin maltraité par sa famille adoptive, découvre qu\'il est un sorcier le jour de ses 11 ans. Il rejoint l\'école de sorcellerie Poudlard où il se fait des amis et des ennemis et découvre la vérité sur la mort de ses parents. Avec l\'aide de ses amis, il affronte Voldemort, le sorcier noir responsable de la mort de ses parents.', 5, 'image', 1),
-	(2, 'Harry Potter and the Chamber of Secrets', '2002-01-01', 161, 'De retour pour sa deuxième année à Poudlard, Harry Potter découvre une série d\'attaques mystérieuses pétrifiant les élèves. Avec l\'aide de Ron et Hermione, il découvre l\'existence d\'une chambre secrète renfermant un terrible monstre. Harry doit affronter le danger et sauver ses camarades.', 5, 'image', 1),
-	(3, 'Harry Potter and the Prisoner of Azkaban', '2004-01-01', 142, 'Harry Potter entre en troisième année à Poudlard et apprend que le dangereux prisonnier Sirius Black s\'est échappé d\'Azkaban. Harry découvre que Sirius est lié à la mort de ses parents. Avec l\'aide de ses amis et du professeur Lupin, Harry découvre la vérité sur Sirius et se rapproche de son parrain.', 5, 'image', 1),
-	(4, 'Avatar', '2009-12-18', 162, 'Un marine paraplégique est envoyé sur la planète Pandora en mission mais se retrouve déchiré entre suivre ses ordres et protéger le monde qu\'il ressent comme son chez-soi.', 5, 'image', 2),
-	(5, 'Avatar: La Voie de l\'eau', '2022-12-16', 192, 'Jake Sully vit désormais avec sa nouvelle famille sur Pandora. Lorsque surgit une ancienne menace, il doit collaborer avec Neytiri et l\'armée Na\'vi pour protéger leur planète.', 5, 'image', 2);
+-- Les données exportées n'étaient pas sélectionnées.
 
 -- Listage de la structure de table cinema. genre
 CREATE TABLE IF NOT EXISTS `genre` (
   `id_genre` int NOT NULL AUTO_INCREMENT,
   `libelle` varchar(200) NOT NULL,
   PRIMARY KEY (`id_genre`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table cinema.genre : ~0 rows (environ)
-INSERT INTO `genre` (`id_genre`, `libelle`) VALUES
-	(1, 'Fantastique '),
-	(2, 'Aventure'),
-	(3, 'Action'),
-	(4, 'Science-Fiction');
+-- Les données exportées n'étaient pas sélectionnées.
 
 -- Listage de la structure de table cinema. personne
 CREATE TABLE IF NOT EXISTS `personne` (
@@ -136,20 +89,12 @@ CREATE TABLE IF NOT EXISTS `personne` (
   `nom` varchar(100) NOT NULL,
   `prenom` varchar(100) NOT NULL,
   `sexe` varchar(50) NOT NULL,
-  `dateNaissance` date NOT NULL,
+  `dateNaissance` date DEFAULT NULL,
+  `photo` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id_personne`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table cinema.personne : ~0 rows (environ)
-INSERT INTO `personne` (`id_personne`, `nom`, `prenom`, `sexe`, `dateNaissance`) VALUES
-	(1, 'Radcliffe', 'Daniel', 'H', '1989-07-23'),
-	(2, 'Grint', 'Rupert', 'H', '1988-08-24'),
-	(3, 'Watson', 'Emma', 'F', '1990-04-24'),
-	(4, 'Columbus', 'Chris', 'H', '1958-09-10'),
-	(6, 'Cameron', 'James', 'M', '1954-08-16'),
-	(7, 'Worthington', 'Sam', 'M', '1976-08-02'),
-	(8, 'Saldana', 'Zoe', 'F', '1978-06-19'),
-	(9, 'Weaver', 'Sigourney', 'F', '1949-10-08');
+-- Les données exportées n'étaient pas sélectionnées.
 
 -- Listage de la structure de table cinema. realisateur
 CREATE TABLE IF NOT EXISTS `realisateur` (
@@ -158,29 +103,18 @@ CREATE TABLE IF NOT EXISTS `realisateur` (
   PRIMARY KEY (`id_realisateur`),
   UNIQUE KEY `id_personne` (`id_personne`),
   CONSTRAINT `FK_realisateur_personne` FOREIGN KEY (`id_personne`) REFERENCES `personne` (`id_personne`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table cinema.realisateur : ~0 rows (environ)
-INSERT INTO `realisateur` (`id_realisateur`, `id_personne`) VALUES
-	(1, 4),
-	(2, 6);
+-- Les données exportées n'étaient pas sélectionnées.
 
 -- Listage de la structure de table cinema. role
 CREATE TABLE IF NOT EXISTS `role` (
   `id_role` int NOT NULL AUTO_INCREMENT,
   `nomPersonnage` varchar(100) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_role`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Listage des données de la table cinema.role : ~0 rows (environ)
-INSERT INTO `role` (`id_role`, `nomPersonnage`) VALUES
-	(1, 'Harry Potter'),
-	(2, 'Ron Weasley'),
-	(3, 'Hermione Granger'),
-	(4, 'Jake Sully'),
-	(5, 'Neytiri'),
-	(6, 'Dr. Grace Augustine'),
-	(7, 'Kiri');
+-- Les données exportées n'étaient pas sélectionnées.
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
