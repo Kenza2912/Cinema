@@ -29,7 +29,29 @@ Cet exercice nous a permis d'apprendre et de mettre en pratique plusieurs concep
 Voici quelques captures d'écran pour illustrer l'interface utilisateur de l'application :
 
 ### Liste des Films
-![Liste des films]()
+<div align="center">
+<img src="public/image/listFilm.png" alt="Liste des films" width="950"/>
+</div>
 
 ### Détail d'un Film
-![Détail d'un film]()
+<div align="center">
+    <img src="public/image/detailFilm.png" alt="Détail d'un film" width="950"/>
+</div>
+
+### Liste des Acteurs
+<div align="center">
+    <img src="public/image/listActeur.png" alt="Liste des Acteurs" width="950"/>
+</div>
+
+### Détail d'un Acteur
+<div align="center">
+    <img src="public/image/detailActeur.png" alt="Détail d'un Acteur" width="950"/>
+</div>
+
+### Formulaire d'ajout de film
+<div align="center">
+    <img src="public/image/ajouterFilm.png" alt="Formulaire d'ajout de film" width="950"/>
+</div>
+
+
+
