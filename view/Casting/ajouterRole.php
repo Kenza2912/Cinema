@@ -1,12 +1,12 @@
 <?php ob_start();?>
 
-<div>
+<div  class="form-container">
 
 <form  action="index.php?action=ajouterRole" method="post">
     
-    <h2>Ajouter un rôle</h2>
+
     
-    <div>
+    <div >
         <label>Nom du personnage</label>
         <input type="text"  name="nomPersonnage" id="nomPersonnage" required>
     </div>

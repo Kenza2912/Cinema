@@ -8,7 +8,7 @@ class RealisateurController {
     // Lister les réalisateurs
     public function listRealisateur(){
         $pdo = Connect::seConnecter(); //On se connecte
-        $requeteRealisateur = $pdo->query(" SELECT r.id_realisateur, CONCAT(p.nom, ' ', p.prenom) AS realisateur FROM realisateur r LEFT JOIN personne p ON r.id_personne = p.id_personne ORDER BY realisateur"); 
+        $requeteRealisateur = $pdo->query(" SELECT r.id_realisateur, p.photo, CONCAT(p.nom, ' ', p.prenom) AS realisateur FROM realisateur r LEFT JOIN personne p ON r.id_personne = p.id_personne ORDER BY realisateur"); 
         $requeteRealisateur->execute();
         require ("view/Realisateur/listRealisateur.php"); 
     }
@@ -16,7 +16,7 @@ class RealisateurController {
 
     public function detailRealisateur($id){
         $pdo = Connect::seConnecter();
-        $requeteDetailRealisateur = $pdo->prepare("SELECT id_realisateur, p.prenom, p.nom, p.sexe, DATE_FORMAT(p.dateNaissance, '%d/%m/%Y') AS dateNaissance FROM realisateur r, personne p WHERE r.id_personne = p.id_personne AND r.id_realisateur = :id");
+        $requeteDetailRealisateur = $pdo->prepare("SELECT id_realisateur, p.prenom, p.nom, p.photo, p.sexe, DATE_FORMAT(p.dateNaissance, '%d/%m/%Y') AS dateNaissance FROM realisateur r, personne p WHERE r.id_personne = p.id_personne AND r.id_realisateur = :id");
          $requeteDetailRealisateur->execute(["id" => $id]);
 
         $requeteFilms = $pdo->prepare("SELECT f.id_film, f.titre, r.id_realisateur

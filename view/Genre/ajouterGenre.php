@@ -3,7 +3,7 @@
 ob_start();
 
 ?>
-<div class="container-form">
+<div class="form-container">
 
 <form action="index.php?action=ajouterGenre" method="post" >
     

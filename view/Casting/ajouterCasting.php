@@ -1,7 +1,7 @@
 <?php ob_start();?>
 
 
-<div >
+<div class="form-container" >
 <form action="index.php?action=ajouterCasting" method="POST" >
     
     <p>Ajouter un acteur ou une actrice à un rôle et au film joué </p>
