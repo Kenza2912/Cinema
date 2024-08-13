@@ -19,7 +19,7 @@ Ce projet est une application web développée en PHP, destinée à gérer une b
 ## Concepts Appris
 Cet exercice nous a permis d'apprendre et de mettre en pratique plusieurs concepts fondamentaux du développement web :
 
-- **Modèle MVC (Model-View-Controller)** : Structuration du projet en séparant les responsabilités entre le modèle (gestion des données), la vue (interface utilisateur), et le contrôleur (logique métier).
+- **Modèle MVC (Model-View-Controller)** : Structure du projet qui sépare les responsabilités entre le modèle (gestion des données et de la logique métier), la vue (affichage des données et interface utilisateur), et le contrôleur (gestion des interactions et coordination entre le modèle et la vue).
 - **Gestion des bases de données avec PHP** : Interaction avec une base de données MySQL pour stocker et récupérer les informations sur les films, les acteurs, etc.
 - **CRUD (Create, Read, Update, Delete)** : Implémentation des opérations de base pour gérer les ressources au sein de l'application.
 - **Gestion des sessions et sécurisation des formulaires** : Concepts de base pour sécuriser l'application.
